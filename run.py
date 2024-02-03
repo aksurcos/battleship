@@ -287,8 +287,8 @@ class battleShip:
                 bool_is_random = is_random == "True"
         return bool_is_random
 
-n_row = 15
-n_column = 15
+n_row = 10
+n_column = 10
 n_ship = 3
 
 battle_ship = battleShip(n_row, n_column, n_ship)
