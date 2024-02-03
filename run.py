@@ -18,12 +18,11 @@ class warZone:
             "your": self.warzone,
             "other": self.other_warzone
         }
-
-    self.update_codes = {
-        "missed": colored_print("X", "yellow"),
-        "hit": colored_print("+", "green"),
-        "damaged": colored_print("X","red")
-    }
+        self.update_codes = {
+            "missed": colored_print("X", "yellow"),
+            "hit": colored_print("+", "green"),
+            "damaged": colored_print("X","red")
+        }
     
     def init_warzone(self):
         matrix = []
@@ -31,25 +30,81 @@ class warZone:
             matrix.append(["-"]*self.n_column)
         return matrix
 
+
     def place_ships(self, ship, row_number, column_number, horizontal_vertical):
         for i in range(ship): # ship = 4
             if horizontal_vertical == "horizontal":
                 self.warzone[row_number][column_number+i] = self.ship_shape
             else:
                 self.warzone[row_number+i][column_number] = self.ship_shape
-        self.total_ship_points += ship 
+        self.total_ship_points += ship
+
+    def is_coordinate_ok(self, ship, row_number, column_number, horizontal_vertical):
+        location = column_number if horizontal_vertical == "horizontal" else row_number
+        edge = self.n_column if horizontal_vertical == "horizontal" else self.n_row
+        is_zone_enough = self.is_zone_enough(ship, location, edge)
+
+        if not is_zone_enough:
+            raise RuntimeError
+
+        is_position_ok = self.is_position_ok(ship, row_number, column_number, horizontal_vertical)
         
+        if not is_position_ok:
+            raise RuntimeError
+
+        def is_zone_enough(self, ship, location, edge):
+            if ship + location >= edge:
+                return False
+            return True
+        
+        def is_position_ok (self, ship, row_number column_number, horizontal_vertical):
+            for i in range(ship):
+                if horizontal_vertical == "horizontal":
+                    symbol = self.warzone[row_number][column_number+i]
+                else:
+                    symbol = self.warzone[row_number+i][column_number]
+                if symbol == self.ship_shape
+                    return False
+            return True
+
+        def is_target_ok(self, row_number, column_number):
+            if not (0 <= row_number and row_number < self.n_row):
+                return False
+
+            if not (0 <= column_number and column_number < self.n_column):
+                return False
+
+            green_x = self.update_codes["hit"]
+            yellow_x = self.update_codes["missed"]
+            if self.other_warzone[row_number][column_number] in [green_x, yellow_x]:
+                return False
+            
+            return True
+    
+    def update(self, row_number, column_number, comp_warzone):
+        if comp_warzone.warzone[row_number][column_number] == self.ship_shape:
+            self._update("other", row_number, column_number, "hit")
+            self.total_ship_points -= 1
+            comp_warzone._update("your", row_number, column_number, "damaged")
+        else:
+            self._update("other", row_number, column_number, "missed")
+            comp_warzone._update("your", row_number, column_number, "missed")
+
+    def _update(self, which, row_number, column_number, result):
+        self.warzones[which][row_number][column_number] = self.update_codes[result]
+                
+
     def __str__(self):
-        our_warzone = self.create_warzone(self.warzone)
+        your_warzone = self.create_warzone(self.warzone)
         other_warzone = self.create_warzone(self.other_warzone)
 
-        our_warzone_list = our_warzone.split("\n")
+        your_warzone_list = your_warzone.split("\n")
         other_warzone_list = other_warzone.split("\n")
         more_character = len(str(self.n_column)) - 1
         other_warzone_list[0] = other_warzone_list[0][more_character:]
         
-        warzone_str = [(10*" ").join([me, other])
-                        for me, other in zip(our_warzone_list, other_warzone_list)]
+        warzone_str = [(10*" ").join([your, other])
+                        for your, other in zip(your_warzone_list, other_warzone_list)]
         return "\n".join(warzone_str)
 
     def create_warzone(self, warzone):
@@ -103,7 +158,7 @@ class warShips:
                         raise RuntimeError
                     row_number = int(row_number)
                     column_number = int(column_number)
-                    self.warzone.is_coordinates_ok(ship, row_number,
+                    self.warzone.is_coordinate_ok(ship, row_number,
                                                                     column_number, horizontal_vertical)
                 except RuntimeError:
                     if not random:
