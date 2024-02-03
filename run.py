@@ -63,9 +63,6 @@ class warZone:
             war_zone_str += row_number + space_str + row_str + "\n"
         return war_zone_str
 
-war_zone = warZone(15, 15)
-print(war_zone)
-
 class warShips:
     def __init__(self, ships, war_zone):
         self.ships= ships # [3, 5, 6, 3, 4]
@@ -104,6 +101,34 @@ ships = [3, 4]
 
 war_ships = warShips(ships, war_zone)
 war_ships.enter_ships_coordinates()
+
+class Player:
+    def __init__(self, war_zone, war_ships, is_comp):
+        pass
+
+class battleShip:
+    def __init__(self, n_row, n_column, n_ship):
+        player_warzone = warZone(n_row, n_column)
+        comp_warzone = warZone(n_row, n_column)
+    
+        self.ships = []
+
+        player_war_ships = WarShips(self.ships, player_warzone)
+        comp_war_ships = WarShips(self.ships, comp_warzone)
+
+        self.player = Player(player_warzone, player_war_ships, False)
+        self.comp = Player(comp_warzone, player_war_ships, True)
+
+n_column = 10
+n_row = 10 
+n_ship = 4
+
+battle_ship = battleShip(n_row, n_column, n_ship)
+battle_ship.start()
+
+
+
+
 
 
 
