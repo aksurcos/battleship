@@ -279,7 +279,7 @@ class battleShip:
 
     def random_or_manuel(self):
         is_random = None
-        while is_random = None
+        while is_random is None
             is_random = input("Do you want to place your ships randomly or manually? If randomly, type True. If not type False." )
             if is_random not in ["True", "False"]:
                 is_random = None
