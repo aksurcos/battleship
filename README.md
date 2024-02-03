@@ -22,7 +22,7 @@ There are many features in the codes written in this project, such as whether th
 
 ### Unsolved Bugs
 
-!bugs](/bugs.png)
+![bugs](/bugs.png)
 
 While there was no problem placing the ships in the beginning, when new features were added, everything became something I could not solve.
 
