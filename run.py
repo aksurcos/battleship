@@ -11,15 +11,15 @@ class warZone:
     def init_war_zone(self):
         matrix = []
         for row in range(self.n_row):
-            matrix.append(["o"]*self.n_column)
+            matrix.append(["+"]*self.n_column)
         return matrix
 
     def place_ships(self, ship, row_number, column_number, horizontal_vertical):
-        for i in range(ship): gemi = 4
-            if vertical == "vertical:"
-                self.war_zone[row_number][column_number] = self.ship_shape
+        for i in range(ship): # ship = 4
+            if horizontal_vertical == "horizontal":
+                self.war_zone[row_number][column_number+i] = self.ship_shape
             else:
-                self.war_zone[row_number+i][column_number = self.ship_shape]
+                self.war_zone[row_number+i][column_number] = self.ship_shape
 
     def __str__(self):
         our_war_zone = self.create_war_zone(self.war_zone)
