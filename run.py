@@ -1,5 +1,11 @@
 import random
 
+def colored_print(print_str, color):
+    colors = {"red": 31, "green": 32, "yellow": 33}
+    color_code = colors[color]
+    return f"\033[1;{color_code}m{print_str}\033[0m"
+
+
 class warZone:
     def __init__(self, n_row, n_column):        
         self.n_row = n_row
@@ -12,11 +18,17 @@ class warZone:
             "your": self.warzone,
             "other": self.other_warzone
         }
+
+    self.update_codes = {
+        "missed": colored_print("X", "yellow"),
+        "hit": colored_print("+", "green"),
+        "damaged": colored_print("X","red")
+    }
     
     def init_warzone(self):
         matrix = []
         for row in range(self.n_row):
-            matrix.append(["+"]*self.n_column)
+            matrix.append(["-"]*self.n_column)
         return matrix
 
     def place_ships(self, ship, row_number, column_number, horizontal_vertical):
@@ -25,7 +37,8 @@ class warZone:
                 self.warzone[row_number][column_number+i] = self.ship_shape
             else:
                 self.warzone[row_number+i][column_number] = self.ship_shape
-
+        self.total_ship_points += ship 
+        
     def __str__(self):
         our_warzone = self.create_warzone(self.warzone)
         other_warzone = self.create_warzone(self.other_warzone)
@@ -74,7 +87,7 @@ class warShips:
         self.ships= ships # [3, 5, 6, 3, 4]
         self.warzone = warzone
 
-    def enter_ships_coordinates(self, random:False, computer=False):
+    def enter_ships_coordinates(self, random:False, comp=False):
         for ship in self.ships:
             row_number = None
             column_number = None
@@ -100,7 +113,7 @@ class warShips:
                     # horizontal_vertical = None
                 else:
                     self.warzone.place_ships(ship, row_number, column_number, horizontal_vertical)
-        if not computer:
+        if not comp:
             print(self.warzone)
     
     def take_given_values(self, ship):
@@ -175,20 +188,51 @@ class battleShip:
         player_warzone = warZone(n_row, n_column)
         comp_warzone = warZone(n_row, n_column)
     
-        self.ships = []
-
-        player_war_ships = WarShips(self.ships, player_warzone)
-        comp_war_ships = WarShips(self.ships, comp_warzone)
+        self.ships = self.create_ship(n-ship)        
+        
+        player_war_ships = warships(self.ships, player_warzone)
+        comp_war_ships = warships(self.ships, comp_warzone)
 
         self.player = Player(player_warzone, player_war_ships, False)
         self.comp = Player(comp_warzone, player_war_ships, True)
+    
+    def start(self):
+        is_random = self.random_or_manuel()
+        self.player.warships.take_ships_coordinates(random=is_random, comp=False)
+        self.comp.warships.take_ships_coordinates(random=True, comp=True)
 
-n_column = 10
-n_row = 10 
-n_ship = 4
+        while True:
+            player_won = self.player.play(self.comp)
 
-battle_ship = battleShip(n_row, n_column, n_ship)
-battle_ship.start()
+            if player_won:
+                print("CONGRATULATONS! You win.")
+                break
+            
+            comp_won = self.comp.play(self.player)
+            
+            if comp_won:
+                print("SORRY! You lost.")
+                break
+    
+    @staticmethod
+    def create_ship(n_ship):
+        ships = []
+        max_ship_size = 5
+        for ship in range(n_ship):
+            ships.append(random.randint(1, max_ship_size))
+        return ships
+
+    def random_or_manuel(self):
+        is_random = None
+        while is_random = None
+            is_random = input("Do you want to place your ships randomly or manually? If randomly, type True. If not type False." )
+            if is_random not in ["True", "False"]:
+                is_random = None
+            else:
+                bool_is_random = is_random == "True"
+        return bool_is_random
+
+
 
 
 
