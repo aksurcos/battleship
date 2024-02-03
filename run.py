@@ -57,13 +57,13 @@ class warZone:
                 return False
             return True
         
-        def is_position_ok (self, ship, row_number column_number, horizontal_vertical):
+        def is_position_ok (self, ship, row_number, column_number, horizontal_vertical):
             for i in range(ship):
                 if horizontal_vertical == "horizontal":
                     symbol = self.warzone[row_number][column_number+i]
                 else:
                     symbol = self.warzone[row_number+i][column_number]
-                if symbol == self.ship_shape
+                if symbol == self.ship_shape:
                     return False
             return True
 
