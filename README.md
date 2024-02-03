@@ -47,13 +47,12 @@ While there was no problem placing the ships in the beginning, when new features
 ### Codes   
 - Code Institute Ready Template
 - The previous project for defaults and README.md
-- [Udemy Sources]([https://www.udemy.com/course/sifirdan-ileri-seviyeye-python/)]
-- [Youtube Tutors]([https://www.youtube.com/@emkademy])
-
+- [Udemy Sources](https://www.udemy.com/course/sifirdan-ileri-seviyeye-python/)
+- [Youtube Tutors]([https://www.youtube.com/@emkademy)
 
 
 ### Inspration and Thanking
-I couldn't consult Student Tutor teaem because I didn't have enough time because of the reasons are explained above. I realize I need a feedback to fix the bugs. Thanks everyone for their understanding.
+I couldn't consult Student Tutor teaem because I didn't have enough time because of the reasons are explained above. I realize I need a feedback to fix the bugs. Thanks everyone for your understanding.
 
 
 
