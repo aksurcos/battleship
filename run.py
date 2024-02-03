@@ -7,6 +7,11 @@ class warZone:
         self.ship_shape = "O"
         self.warzone = self.init_warzone()
         self.other_warzone = self.init_warzone()
+        self.total_ship_points = 0
+        self.warzones = {
+            "your": self.warzone,
+            "other": self.other_warzone
+        }
     
     def init_warzone(self):
         matrix = []
