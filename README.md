@@ -30,16 +30,16 @@ While there was no problem placing the ships in the beginning, when new features
 
 ### Deployment steps
 
--Log in to your account at heroku.com if you don't have any, create one.
--Click on create a new app, give an matchless app name and then choose your region
--Click on create app
--Go to "Settings"
--Add required buildpacks. For this project, set them up as Python is on top and Node.js on bottom
--Go to "Deploy" and select "GitHub" in "Deployment method"
--Connect Heroku app to your Github account and write the repository name, click 'Search' and then 'Connect'
--Choose the branch
--If it is preferred click on "Enable Automatic Deploys" which can keep your app up to date with your GitHub repository
--Wait for the app to build. When it is ready, you will see the “App was successfully deployed” message and a 'View' button to see your deployed app.
+- Log in to your account at heroku.com if you don't have any, create one.
+- Click on create a new app, give an matchless app name and then choose your region
+- Click on create app
+- Go to "Settings"
+- Add required buildpacks. For this project, set them up as Python is on top and Node.js on bottom
+- Go to "Deploy" and select "GitHub" in "Deployment method"
+- Connect Heroku app to your Github account and write the repository name, click 'Search' and then 'Connect'
+- Choose the branch
+- If it is preferred click on "Enable Automatic Deploys" which can keep your app up to date with your GitHub repository
+- Wait for the app to build. When it is ready, you will see the “App was successfully deployed” message and a 'View' button to see your deployed app.
 
     
 ## Credits
