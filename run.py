@@ -10,10 +10,23 @@ class warZone:
     def init_war_zone(self):
         matrix = []
         for row in range(self.n_row):
-            matrix.append(["-"]*self.n_column)
+            matrix.append(["o"]*self.n_column)
         return matrix
 
     def __str__(self):
+        our_war_zone = self.create_war_zone(self.war_zone)
+        other_war_zone = self.create_war_zone(self.other_war_zone)
+
+        our_war_zone_list = our_war_zone.split("\n")
+        other_war_zone_list = other_war_zone.split("\n")
+        more_character = len(str(self.n_column)) - 1
+        other_war_zone_list[0] = other_war_zone_list[0][more_character:]
+        
+        war_zone_str = [(10*" ").join([me, other])
+                        for me, other in zip(our_war_zone_list, other_war_zone_list)]
+        return "\n".join(war_zone_str)
+
+    def create_war_zone(self, war_zone):
         row_numbers = list(range(self.n_row))
         row_numbers = list(map(str, row_numbers))
 
@@ -42,11 +55,5 @@ class warZone:
             war_zone_str += row_number + space_str + row_str + "\n"
         return war_zone_str
 
-
-
-
-
-        
-
-
-    
+create_war_zone = warZone(15, 15)
+print(create_war_zone)
