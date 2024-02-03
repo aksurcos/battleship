@@ -52,7 +52,7 @@ While there was no problem placing the ships in the beginning, when new features
 
 
 ### Inspration and Thanking
-I couldn't consult Student Tutor team because I could not have enough time because of the reasons are explained above. I realize I need a feedback to fix the bugs. Thanks everyone for your understanding.
+I couldn't consult Student Tutor team because I could not have enough time because of the reasons are explained above. I realize I need a feedback after codes checking to fix the bugs. Thanks everyone for your understanding.
 
 
 
