@@ -1,32 +1,59 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+<h1 align="center">Broken Battleship </h1>
 
-Welcome,
+[Click here to check live project](https://broken-battleship-9b1b7c940597.herokuapp.com/)
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **March 14, 2023**
+A Battleship game that added a lot of features and eventually and sadly none of them worked.
 
-## Reminders
+![responsive](/battleship.png)
 
-- Your code must be placed in the `run.py` file
-- Your dependencies must be placed in the `requirements.txt` file
-- Do not edit any of the other files or your code may not deploy properly
 
-## Creating the Heroku app
+## Index – Table of Contents
+* [Features](#features)
+* [Deployment](#deployment)
+* [Bugs](#bugs)
+* [Credits](#credits)
+  
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+## Features
 
-1. `heroku/python`
-2. `heroku/nodejs`
+There are many features in the codes written in this project, such as whether the placing ships fit into the area and whether the determined target location is suitable or not. However, it is not used due to unresolved errors. Since I felt inadequate after the second project and continued to learn JavaScript, I was able to devote very little time to the Python project and could not solve these problems. I'm sorry that I couldn't spare enough time to fix bugs in a project that I wanted to add so many features to.
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
+## Bugs
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
+### Unsolved Bugs
 
-Connect your GitHub repository and deploy as normal.
+!bugs](/bugs.png)
 
-## Constraints
+While there was no problem placing the ships in the beginning, when new features were added, everything became something I could not solve.
 
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
+## Deployment
 
----
+### Deployment steps
 
-Happy coding!
+-Log in to your account at heroku.com if you don't have any, create one.
+-Click on create a new app, give an matchless app name and then choose your region
+-Click on create app
+-Go to "Settings"
+-Add required buildpacks. For this project, set them up as Python is on top and Node.js on bottom
+-Go to "Deploy" and select "GitHub" in "Deployment method"
+-Connect Heroku app to your Github account and write the repository name, click 'Search' and then 'Connect'
+-Choose the branch
+-If it is preferred click on "Enable Automatic Deploys" which can keep your app up to date with your GitHub repository
+-Wait for the app to build. When it is ready, you will see the “App was successfully deployed” message and a 'View' button to see your deployed app.
+
+    
+## Credits
+
+### Codes   
+- Code Institute Ready Template
+- The previous project for defaults and README.md
+- [Udemy Sources]([https://www.udemy.com/course/sifirdan-ileri-seviyeye-python/)]
+- [Youtube Tutors]([https://www.youtube.com/@emkademy])
+
+
+
+### Inspration and Thanking
+I couldn't consult Student Tutor teaem because I didn't have enough time because of the reasons are explained above. I realize I need a feedback to fix the bugs. Thanks everyone for their understanding.
+
+
+
