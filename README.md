@@ -48,7 +48,7 @@ While there was no problem placing the ships in the beginning, when new features
 - Code Institute Ready Template
 - The previous project for defaults and README.md
 - [Udemy Sources](https://www.udemy.com/course/sifirdan-ileri-seviyeye-python/)
-- [Youtube Tutors]([https://www.youtube.com/@emkademy)
+- [Youtube Tutors](https://www.youtube.com/@emkademy)
 
 
 ### Inspration and Thanking
