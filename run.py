@@ -11,20 +11,20 @@ class warZone:
         self.n_row = n_row
         self.n_column = n_column
         self.ship_shape = "O"
-        self.warzone = self.init_warzone()
-        self.other_warzone = self.init_warzone()
+        self.war_zone = self.init_war_zone()
+        self.other_war_zone = self.init_war_zone()
         self.total_ship_points = 0
-        self.warzones = {
-            "your": self.warzone,
-            "other": self.other_warzone
+        self.war_zones = {
+            "own": self.war_zone,
+            "other": self.other_war_zone
         }
         self.update_codes = {
-            "missed": colored_print("X", "yellow"),
-            "hit": colored_print("+", "green"),
-            "damaged": colored_print("X","red")
+            "missed": colored_print("x", "yellow"),
+            "hit": colored_print("x", "green"),
+            "damaged": colored_print("x","red")
         }
     
-    def init_warzone(self):
+    def init_war_zone(self):
         matrix = []
         for row in range(self.n_row):
             matrix.append(["-"]*self.n_column)
@@ -34,9 +34,9 @@ class warZone:
     def place_ships(self, ship, row_number, column_number, horizontal_vertical):
         for i in range(ship): # ship = 4
             if horizontal_vertical == "horizontal":
-                self.warzone[row_number][column_number+i] = self.ship_shape
+                self.war_zone[row_number][column_number+i] = self.ship_shape
             else:
-                self.warzone[row_number+i][column_number] = self.ship_shape
+                self.war_zone[row_number+i][column_number] = self.ship_shape
         self.total_ship_points += ship
 
     def is_coordinate_ok(self, ship, row_number, column_number, horizontal_vertical):
@@ -47,7 +47,7 @@ class warZone:
         if not is_zone_enough:
             raise RuntimeError
 
-        is_position_ok = self.is_position_ok(ship, row_number, column_number, horizontal_vertical)
+        is_position_ok= self.is_position_ok(ship, row_number, column_number, horizontal_vertical)
         
         if not is_position_ok:
             raise RuntimeError
@@ -60,9 +60,9 @@ class warZone:
         def is_position_ok (self, ship, row_number, column_number, horizontal_vertical):
             for i in range(ship):
                 if horizontal_vertical == "horizontal":
-                    symbol = self.warzone[row_number][column_number+i]
+                    symbol = self.war_zone[row_number][column_number+i]
                 else:
-                    symbol = self.warzone[row_number+i][column_number]
+                    symbol = self.war_zone[row_number+i][column_number]
                 if symbol == self.ship_shape:
                     return False
             return True
@@ -76,38 +76,38 @@ class warZone:
 
             green_x = self.update_codes["hit"]
             yellow_x = self.update_codes["missed"]
-            if self.other_warzone[row_number][column_number] in [green_x, yellow_x]:
+            if self.other_war_zone[row_number][column_number] in [green_x, yellow_x]:
                 return False
             
             return True
     
-    def update(self, row_number, column_number, comp_warzone):
-        if comp_warzone.warzone[row_number][column_number] == self.ship_shape:
+    def update(self, row_number, column_number, comp_war_zone):
+        if comp_war_zone.war_zone[row_number][column_number] == self.ship_shape:
             self._update("other", row_number, column_number, "hit")
             self.total_ship_points -= 1
-            comp_warzone._update("your", row_number, column_number, "damaged")
+            comp_war_zone._update("own", row_number, column_number, "damaged")
         else:
             self._update("other", row_number, column_number, "missed")
-            comp_warzone._update("your", row_number, column_number, "missed")
+            comp_war_zone._update("own", row_number, column_number, "missed")
 
     def _update(self, which, row_number, column_number, result):
-        self.warzones[which][row_number][column_number] = self.update_codes[result]
+        self.war_zones[which][row_number][column_number] = self.update_codes[result]
                 
 
     def __str__(self):
-        your_warzone = self.create_warzone(self.warzone)
-        other_warzone = self.create_warzone(self.other_warzone)
+        our_war_zone = self.create_war_zone(self.war_zone)
+        other_war_zone = self.create_war_zone(self.other_war_zone)
 
-        your_warzone_list = your_warzone.split("\n")
-        other_warzone_list = other_warzone.split("\n")
+        our_war_zone_list = our_war_zone.split("\n")
+        other_war_zone_list = other_war_zone.split("\n")
         more_character = len(str(self.n_column)) - 1
-        other_warzone_list[0] = other_warzone_list[0][more_character:]
+        other_war_zone_list[0] = other_war_zone_list[0][more_character:]
         
-        warzone_str = [(10*" ").join([your, other])
-                        for your, other in zip(your_warzone_list, other_warzone_list)]
-        return "\n".join(warzone_str)
+        war_zone_str = [(10*" ").join([own, other])
+                        for own, other in zip(our_war_zone_list, other_war_zone_list)]
+        return "\n".join(war_zone_str)
 
-    def create_warzone(self, warzone):
+    def create_war_zone(self, war_zone):
         row_numbers = list(range(self.n_row))
         row_numbers = list(map(str, row_numbers))
 
@@ -118,38 +118,38 @@ class warZone:
         max_column = len(column_numbers[-1])
 
         space_str = " " * max_row
-        warzone_str = space_str
+        war_zone_str = space_str
         for column_number in column_numbers: # ["0", "1", "2", "3", ..., "10"]
             space_number = max_column - len(column_number) + 1
             space_str = " " * space_number
-            warzone_str += column_number + space_str
-        warzone_str = warzone_str[:-len(space_str)]
-        warzone_str += "\n"
+            war_zone_str += column_number + space_str
+        war_zone_str = war_zone_str[:-len(space_str)]
+        war_zone_str += "\n"
 
         for row_number in row_numbers: # ["0", "1", "2", "3"....]
             space_number = max_row - len(row_number)
             space_str = " " * space_number
 
-            row = self.warzone[int(row_number)]
+            row = self.war_zone[int(row_number)]
             row_str = (max_column* " ").join(row)
 
-            warzone_str += row_number + space_str + row_str + "\n"
-        return warzone_str
+            war_zone_str += row_number + space_str + row_str + "\n"
+        return war_zone_str
 
 
 class warShips:
-    def __init__(self, ships, warzone):
+    def __init__(self, ships, war_zone):
         self.ships= ships # [3, 5, 6, 3, 4]
-        self.warzone = warzone
+        self.war_zone = war_zone
 
-    def enter_ships_coordinates(self, random:False, comp=False):
+    def take_ships_coordinates(self, haphazard=False, comp=False):
         for ship in self.ships:
             row_number = None
             column_number = None
             horizontal_vertical = None
             while row_number is None or column_number is None or horizontal_vertical is None:
                 try:
-                    if random:
+                    if haphazard:
                         given_values = self.create_random_location()
                     else:
                         given_values = self.take_given_values(ship)
@@ -158,47 +158,47 @@ class warShips:
                         raise RuntimeError
                     row_number = int(row_number)
                     column_number = int(column_number)
-                    self.warzone.is_coordinate_ok(ship, row_number,
-                                                                    column_number, horizontal_vertical)
+                    self.war_zone.is_coordinate_ok(ship, row_number, column_number, horizontal_vertical)
+
                 except RuntimeError:
-                    if not random:
+                    if not haphazard:
                         print("You've entered wrong values. Please, read information again.")
                     row_number = None
                     # column_number = None
                     # horizontal_vertical = None
                 else:
-                    self.warzone.place_ships(ship, row_number, column_number, horizontal_vertical)
+                    self.war_zone.place_ships(ship, row_number, column_number, horizontal_vertical)
         if not comp:
-            print(self.warzone)
+            print(self.war_zone)
     
     def take_given_values(self, ship):
         given_values = input(f"""
 Please enter your {ship}  size ship's coordinates with blank between them.
 Given values by order: row_number (int), column_number (int), horizontal or vertical (str)
-Your current warzone situation:
-{self.warzone}
+Your current war_zone situation:
+{self.war_zone}
 """)
         return given_values
 
     def create_random_location(self):
-        row_number = random.randint(0, self.warzone.n_row-1)
-        column_number = random.randint(0, self.warzone.n_column-1)
+        row_number = random.randint(0, self.war_zone.n_row-1)
+        column_number = random.randint(0, self.war_zone.n_column-1)
         horizontal_vertical = random.choice(["horizontal", "vertical"])
         given_values = f"{row_number} {column_number} {horizontal_vertical}"
         return given_values
 
     def are_all_ships_sinked(self):
-        return self.warzone.total_ship_points == 0
+        return self.war_zone.total_ship_points == 0
 
 class Player:
-    def __init__(self, warzone, war_ships, is_comp):
-        self.warzone = warzone
-        self.warships = warships
+    def __init__(self, war_zone, war_ships, is_comp):
+        self.war_zone = war_zone
+        self.war_ships = war_ships
         self.is_comp = is_comp
     
     def play(self, comp):
         if not self.is_comp:
-            print(self.warzone)
+            print(self.war_zone)
         for i in range(3):
             row_number = None
             column_number = None
@@ -211,7 +211,7 @@ class Player:
                     row_number, column_number = given_values.split(" ")
                     row_number = int(row_number)
                     column_number = int(column_number)
-                    is_ok = self.warzone.is_target_ok(row_number, column_number)
+                    is_ok = self.war_zone.is_target_ok(row_number, column_number)
                     if not is_ok:
                         raise RuntimeError
                 
@@ -220,41 +220,41 @@ class Player:
                         print("You've enter wrong values. Please, read information carefully.")
                     row_number = None
                 else:
-                    self.warzone.update(row_number, column_number, comp.warzone)
+                    self.war_zone.update(row_number, column_number, comp.war_zone)
                     if not self.is_comp:
-                        print(self.warzone)
-                    are_ships_sinked = self.warships.are_all_ships_sinked()
+                        print(self.war_zone)
+                    are_ships_sinked = self.war_ships.are_all_ships_sinked()
                     if are_ships_sinked:
                         return True
         return False
 
     def take_given_values(self):
-        given_values = input(f"Please enter the coordinates that you want to attack.")
+        given_values = input(f"Please enter the coordinates that you want to attack: ")
         return given_values
     
     def create_random_location(self):
-        row_number = random.randint(0, self.warzone.n_row-1)
-        column_number = random.randint(0, self.warzone.n_column-1)
-        given_number = f"{row_number} {column_number}"
+        row_number = random.randint(0, self.war_zone.n_row-1)
+        column_number = random.randint(0, self.war_zone.n_column-1)
+        given_values = f"{row_number} {column_number}"
         return given_values
 
 class battleShip:
     def __init__(self, n_row, n_column, n_ship):
-        player_warzone = warZone(n_row, n_column)
-        comp_warzone = warZone(n_row, n_column)
+        player_war_zone = warZone(n_row, n_column)
+        comp_war_zone = warZone(n_row, n_column)
     
-        self.ships = self.create_ship(n-ship)        
+        self.ships = self.create_ship(n_ship)        
         
-        player_war_ships = warships(self.ships, player_warzone)
-        comp_war_ships = warships(self.ships, comp_warzone)
+        player_war_ships = warShips(self.ships, player_war_zone)
+        comp_war_ships = warShips(self.ships, comp_war_zone)
 
-        self.player = Player(player_warzone, player_war_ships, False)
-        self.comp = Player(comp_warzone, player_war_ships, True)
+        self.player = Player(player_war_zone, player_war_ships, False)
+        self.comp = Player(comp_war_zone, player_war_ships, True)
     
     def start(self):
         is_random = self.random_or_manuel()
-        self.player.warships.take_ships_coordinates(random=is_random, comp=False)
-        self.comp.warships.take_ships_coordinates(random=True, comp=True)
+        self.player.war_ships.take_ships_coordinates(haphazard=is_random, comp=False)
+        self.comp.war_ships.take_ships_coordinates(haphazard=True, comp=True)
 
         while True:
             player_won = self.player.play(self.comp)
@@ -280,21 +280,16 @@ class battleShip:
     def random_or_manuel(self):
         is_random = None
         while is_random is None:
-            is_random = input("Do you want to place your ships randomly or manually? If randomly, type True. If not type False." )
+            is_random = input("Welcome to BattleShip! Do you want to place your ships randomly or manually? If randomly, type True. If not, type False." )
             if is_random not in ["True", "False"]:
                 is_random = None
             else:
                 bool_is_random = is_random == "True"
         return bool_is_random
 
+n_row = 15
+n_column = 15
+n_ship = 3
 
-
-
-
-
-
-
-
-
-
-
+battle_ship = battleShip(n_row, n_column, n_ship)
+battle_ship.start()
