@@ -9,7 +9,7 @@ def boards(board1, board2):
     print("  A B C D E F G H I       A B C D E F G H I")
     for i in range (9):
         row1 = ' '.join(board1[i])
-        row2 = ' '.join(board2[i])
+        row2 = ' '.join(['X' if cell == 'X' else 'o' for cell in board2[i]])
         print(f"{i+1} {row1}     {i+1} {row2}")
 
 #Place Ships Automatic or Manually
@@ -72,7 +72,7 @@ def ship_placement(warzone, manual=True):
     for ships in [1, 2]:
         if manual:
             while True:
-                placement = input(f"{ships}. How would you like to place your 2 ships which are 5 units long? Type 'M' for manual, 'A' for automatic." ).upper()
+                placement = input(f"Welcome to the Battleship Game! How would you like to place your {ships}. ship which are 5 units long? Type 'M' for manual, 'A' for automatic." ).upper()
                 if placement == 'M':
                     warzone = manual_ship(warzone, ships)
                     break
