@@ -1,30 +1,78 @@
-<h1 align="center">Broken Battleship </h1>
+<h1 align="center">the Basic Battleship Game </h1>
 
 [Click here to check live project](https://broken-battleship-9b1b7c940597.herokuapp.com/)
 
-A Battleship game that added a lot of features and eventually and sadly none of them worked.
+This Battleships game was an opportunity to combine my love for strategy and programming. When you think about the Admiral Battle game, it may seem very simple, but when you start coding, if you expect it to move like a human, it can be very difficult to code. That's why I simplified it a bit, here it is now.
 
 ![responsive](/battleship.png)
 
 
 ## Index – Table of Contents
+* [Design](#design)
 * [Features](#features)
+* [Testing](#testing)
 * [Deployment](#deployment)
 * [Bugs](#bugs)
 * [Credits](#credits)
   
 
+## Design
+### Game Board:
+board() function: Creates a 5x5 game board.
+boards() function: Displays player and opponent boards side by side.
+
+### Game Logic:
+Turn-based shooting between player and computer
+Ship placement: Manual or automatic options
+Hit and miss tracking
+Win condition: Sinking all 5 enemy ships
+
+### Key Funnctions:
+
+1. `board()`: 
+   - Creates and returns a 5x5 game board initialized with 'o' characters.
+
+2. `boards(board1, board2)`:
+   - Displays two game boards side by side with color-coded symbols.
+   - Uses Colorama for colored output in the console.
+
+3. `manual_ship(warzone, ship_number, coord)`:
+   - Places a ship manually on the given coordinates.
+
+4. `automatic_ship(warzone)`:
+   - Randomly places a ship on the board.
+
+5. `ship_placement(warzone, manual=True)`:
+   - Handles the ship placement phase.
+   - Allows for both manual and automatic placement of ships.
+
+6. `game(your_board, its_board)`:
+   - Main game loop function.
+   - Manages turns between the player and the computer.
+   - Handles shooting, hit/miss logic, and win conditions.
+
+7. `main()`:
+   - The main function that orchestrates the game flow.
+   - Initializes boards, places ships, and starts the game loop.
+   - Handles game restart logic.
+
 ## Features
 
-There are many features in the codes written in this project, such as whether the placing ships fit into the area and whether the determined target location is suitable or not. However, it is not used due to unresolved errors. Since I felt inadequate after the second project and continued to learn JavaScript, I was able to devote very little time to the Python project and could not solve these problems. I'm sorry that I couldn't spare enough time to fix bugs in a project that I wanted to add so many features to.
+Features
+Colorful console interface using Colorama
+Option for manual or automatic ship placement
+Real-time board updates after each move
+Simple AI for computer opponent
+Game state tracking (hits, misses, ships remaining)
+
+## Testing
+
+![linter](/linter.jpg)
+These are the only errors that it has all codes. It's because of explanations or instructions for actions.
 
 ## Bugs
 
-### Unsolved Bugs
-
-![bugs](/bugs.png)
-
-While there was no problem placing the ships in the beginning, when new features were added, everything became something I could not solve.
+I could not detect any yet.
 
 ## Deployment
 
@@ -44,6 +92,10 @@ While there was no problem placing the ships in the beginning, when new features
     
 ## Credits
 
+- While I was trying to make this project easier I've checked many Battleship projects.
+- Got help from AI when preparing README.md
+- Also checked old projects for README.md
+
 ### Codes   
 - Code Institute Ready Template
 - The previous project for defaults and README.md
@@ -52,7 +104,7 @@ While there was no problem placing the ships in the beginning, when new features
 
 
 ### Inspration and Thanking
-I couldn't consult Student Tutor team because I could not have enough time because of the reasons are explained above. I am aware that I need a feedback after codes checking to fix the bugs. Thanks everyone for your understanding.
+- Thanks a lot to Code Institute Slack Community
 
 
 

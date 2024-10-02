@@ -52,7 +52,7 @@ def automatic_ship(warzone):
 def ship_placement(warzone, manual=True):
     if manual:
         while True:
-            placement = input("Welcome to the Battleship Game! You will have 1 unit long 5 ships to place. How would you like to place your ships? Type 'M' for manual or 'A' for automatic.").upper()
+            placement = input("Welcome to the Battleship Game! You will have a board which has ABCDE horizontally, 12345 vertically and 1 unit long 5 ships to place. How would you like to place your ships? Type 'M' for manual or 'A' for automatic.").upper()
             if placement == 'A':
                 for _ in range(5):  # 5 Ships will be placed.
                     warzone = automatic_ship(warzone)
