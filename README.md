@@ -27,6 +27,24 @@ Ship placement: Manual or automatic options
 Hit and miss tracking
 Win condition: Sinking all 5 enemy ships
 
+### How to play:
+![start](/start.jpg)
+
+- There is greetings and instructions to start. 
+
+![manual](/manual.jpg)
+
+- The placing ship manually needs 5 coordinates.
+
+![finish](/finish.jpg)
+
+- It shows how to target a coordinate. When it is finished, the winner can be seen and there is a feature to start again.
+
+![quit](/quit.png)
+
+- It also has feature to quit all the time.
+
+
 ### Key Funnctions:
 
 1. `board()`: 
@@ -68,7 +86,8 @@ Game state tracking (hits, misses, ships remaining)
 ## Testing
 
 ![linter](/linter.jpg)
-These are the only errors that it has all codes. It's because of explanations or instructions for actions.
+
+- These are the only errors that it has all codes. It's because of explanations or instructions for actions.
 
 ## Bugs
 
@@ -93,7 +112,7 @@ I could not detect any yet.
 ## Credits
 
 - While I was trying to make this project easier I've checked many Battleship projects.
-- Got help from AI when preparing README.md
+- Got help from AI when preparing README.md and to understand classic Battleship game's logic.
 - Also checked old projects for README.md
 
 ### Codes   
