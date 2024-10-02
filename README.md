@@ -87,7 +87,7 @@ Game state tracking (hits, misses, ships remaining)
 
 ![linter](/linter.jpg)
 
-- These are the only errors that it has all codes. It's because of explanations or instructions for actions.
+- These are the only errors that it has in all codes. It's because of explanations or instructions for actions.
 
 ## Bugs
 
