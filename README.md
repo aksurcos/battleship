@@ -40,7 +40,7 @@ Win condition: Sinking all 5 enemy ships
 
 - It shows how to target a coordinate. When it is finished, the winner can be seen and there is a feature to start again.
 
-![quit](/quit.png)
+![quit](/quit.jpg)
 
 - It also has feature to quit all the time.
 
