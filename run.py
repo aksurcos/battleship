@@ -9,8 +9,8 @@ def board():
     return[['o' for _ in range(5)] for _ in range(5)]
 
 def boards(board1, board2):
-    print("      Your Board          Its Board")
-    print("  A B C D E        A B C D E")
+    print("  Your Board     Its Board")
+    print("  A B C D E      A B C D E")
     for i in range(5):
         row1 = ' '.join([Fore.YELLOW + 'S' + Style.RESET_ALL if cell == 'S' else 
                          Fore.GREEN + '+' + Style.RESET_ALL if cell == 'X' else 
@@ -63,7 +63,7 @@ def ship_placement(warzone, manual=True):
                             ships_placed += 1
                             print(f"{ships_placed}. ship is placed at {coord}.")
                             print("\n Your current board:")
-                            print(warzone, board())
+                            boards(warzone, board())
                         else:
                             print(f"{coord} is already full or not accurate. Please try another coordinate.")
                     else:
@@ -74,16 +74,92 @@ def ship_placement(warzone, manual=True):
     else:
         for _ in range(5):
             warzone = automatic_ship(warzone)
-    print("\n All ships are placed. Here is your board:")
-    boards(warzone, board())
-    input("Please press 'ENTER'to start the game.")
+    
+    # Bu satırı kaldırıyoruz
+    # print("\n All ships are placed. Here is your board:")
+    # boards(warzone, board())
+    # input("Please press 'ENTER'to start the game.")
     return warzone
 
+def game(your_board, its_board):
+    your_hits = 0
+    its_hits = 0
 
-your_board = board()
-its_board = board()
+    while your_hits < 5 and its_hits < 5:
+        #Player's turn
+        while True:
+            your_shot = input("Type the coordinate you want to shoot. Example(A1, C2) or Type 'Q' to quit.").upper()
+            if your_shot == 'Q':
+                return 'quit'
+            if len(your_shot) == 2 and your_shot[0] in 'ABCDE' and your_shot[1] in '12345':
+                row = int(your_shot[1]) - 1
+                col = ord(your_shot[0]) - ord('A')
+                if its_board[row][col] == 'o' or its_board[row][col] == 'S':
+                    break
+                else:
+                    print("You've already typed this coordinate, please type different coordinate.")
+            else:
+                print("Unvalid coordinate, pleasee try again.")
 
-your_board = ship_placement(your_board)
-its_board = ship_placement(its_board, manual=False)
+        if its_board[row][col] == 'S':
+            its_board[row][col] = 'X'
+            your_hits += 1
+            print(Fore.GREEN + "You've hit one target." + Style.RESET_ALL)
+        else:
+            its_board[row][col] = 'M'
+            print(Fore.RED + "You've missed." + Style.RESET_ALL)
+    
+        #Computer's Turn
+        while True:
+            its_row = random.randint(0, 4)
+            its_col = random.randint(0, 4)
+            if your_board[its_row][its_col] == 'o' or your_board[its_row][its_col] == 'S':
+                break
+        
+        if your_board[its_row][its_col] == 'S':
+            your_board[its_row][its_col] = 'X'
+            its_hits += 1
+            print(f"Your rival has hit your ship at {chr(its_col + ord('A'))}{its_row + 1} coordinate.")
+        else:
+            your_board[its_row][its_col] = 'M'
+            print(f"Your rival has missed at {chr(its_col + ord('A'))}{its_row + 1} coordinate.")
 
-boards(your_board, its_board)
+        boards(your_board, its_board)
+        print(f"Your hit: {your_hits} The rival's hit:{its_hits}")
+        print()
+
+    if your_hits == 5:
+        print(Fore.GREEN + "YOU WON!" + Style.RESET_ALL)
+    else:
+        print(Fore.RED + "YOUR RIVAL WON!" + Style.RESET_ALL)
+    
+    return 'finished'
+
+def main():
+    while True:
+        your_board = board()
+        its_board = board()
+        
+        your_board = ship_placement(your_board)
+        its_board = ship_placement(its_board, manual=False)
+
+        print("\n All ships are placed. Here is your and rival's boards:")
+        boards(your_board, board())  # Sadece oyuncunun tahtasını göster
+        input("Please press 'ENTER' to start the game.")
+
+        print("\n The game is starting... Your boards:")
+        boards(your_board, its_board)
+        
+        result = game(your_board, its_board)
+
+        if result == 'quit':
+            print("Quitting the game... You can refresh the page to play again.")
+            break
+
+        game_again = input("Do you want to play again? (Y/N)").upper()
+        if game_again != 'Y':
+            print("The game has finished, see you!")
+            break
+
+if __name__== "__main__":
+    main()
