@@ -1,27 +1,31 @@
 import random
 from colorama import Fore, Back, Style, init
 
-#Colorama
+# Colorama
 init(autoreset=True)
 
-#Creating boards side by side
+# Creating boards side by side
+
+
 def board():
-    return[['o' for _ in range(5)] for _ in range(5)]
+    return [['o' for _ in range(5)] for _ in range(5)]
+
 
 def boards(board1, board2):
     print("  Your Board     Its Board")
     print("  A B C D E      A B C D E")
     for i in range(5):
-        row1 = ' '.join([Fore.YELLOW + 'S' + Style.RESET_ALL if cell == 'S' else 
-                         Fore.GREEN + '+' + Style.RESET_ALL if cell == 'X' else 
-                         Fore.RED + 'M' + Style.RESET_ALL if cell == 'M' else 'o' 
+        row1 = ' '.join([Fore.YELLOW + 'S' + Style.RESET_ALL if cell == 'S' else
+                         Fore.GREEN + '+' + Style.RESET_ALL if cell == 'X' else
+                         Fore.RED + 'M' + Style.RESET_ALL if cell == 'M' else 'o'
                          for cell in board1[i]])
-        row2 = ' '.join([Fore.GREEN + '+' + Style.RESET_ALL if cell == 'X' else 
-                         Fore.RED + 'M' + Style.RESET_ALL if cell == 'M' else 'o' 
+        row2 = ' '.join([Fore.GREEN + '+' + Style.RESET_ALL if cell == 'X' else
+                         Fore.RED + 'M' + Style.RESET_ALL if cell == 'M' else 'o'
                          for cell in board2[i]])
         print(f"{i+1} {row1}    {i+1} {row2}")
 
-#Place Ships Automatic or Manually
+# Place Ships Automatic or Manually
+
 
 def manual_ship(warzone, ship_number, coord):
     col = ord(coord[0].upper()) - ord('A')
@@ -33,6 +37,7 @@ def manual_ship(warzone, ship_number, coord):
         print(f"{coord} is not accurate coordinate. Please try again.")
     return warzone
 
+
 def automatic_ship(warzone):
     while True:
         row = random.randint(0, 4)
@@ -40,15 +45,16 @@ def automatic_ship(warzone):
 
         if warzone[row][col] == 'o':
             warzone[row][col] = 'S'
-            break       
+            break
     return warzone
+
 
 def ship_placement(warzone, manual=True):
     if manual:
         while True:
             placement = input("Welcome to the Battleship Game! You will have 1 unit long 5 ships to place. How would you like to place your ships? Type 'M' for manual or 'A' for automatic.").upper()
             if placement == 'A':
-                for _ in range(5): #5 Ships will be placed.
+                for _ in range(5):  # 5 Ships will be placed.
                     warzone = automatic_ship(warzone)
                 break
             elif placement == 'M':
@@ -77,12 +83,13 @@ def ship_placement(warzone, manual=True):
 
     return warzone
 
+
 def game(your_board, its_board):
     your_hits = 0
     its_hits = 0
 
     while your_hits < 5 and its_hits < 5:
-        #Player's turn
+        # Player's turn
         while True:
             your_shot = input("Type the coordinate you want to shoot. Example(A1, C2) or Type 'Q' to quit.").upper()
             if your_shot == 'Q':
@@ -104,14 +111,13 @@ def game(your_board, its_board):
         else:
             its_board[row][col] = 'M'
             print(Fore.RED + "You've missed." + Style.RESET_ALL)
-    
-        #Computer's Turn
+
+        # Computer's Turn
         while True:
             its_row = random.randint(0, 4)
             its_col = random.randint(0, 4)
             if your_board[its_row][its_col] == 'o' or your_board[its_row][its_col] == 'S':
                 break
-        
         if your_board[its_row][its_col] == 'S':
             your_board[its_row][its_col] = 'X'
             its_hits += 1
@@ -128,14 +134,13 @@ def game(your_board, its_board):
         print(Fore.GREEN + "YOU WON!" + Style.RESET_ALL)
     else:
         print(Fore.RED + "YOUR RIVAL WON!" + Style.RESET_ALL)
-    
     return 'finished'
+
 
 def main():
     while True:
         your_board = board()
         its_board = board()
-        
         your_board = ship_placement(your_board)
         its_board = ship_placement(its_board, manual=False)
 
@@ -145,7 +150,7 @@ def main():
 
         print("\n The game is starting... Your boards:")
         boards(your_board, its_board)
-        
+
         result = game(your_board, its_board)
 
         if result == 'quit':
@@ -157,5 +162,6 @@ def main():
             print("The game has finished, see you!")
             break
 
-if __name__== "__main__":
+
+if __name__ == "__main__":
     main()
