@@ -74,11 +74,7 @@ def ship_placement(warzone, manual=True):
     else:
         for _ in range(5):
             warzone = automatic_ship(warzone)
-    
-    # Bu satırı kaldırıyoruz
-    # print("\n All ships are placed. Here is your board:")
-    # boards(warzone, board())
-    # input("Please press 'ENTER'to start the game.")
+
     return warzone
 
 def game(your_board, its_board):
