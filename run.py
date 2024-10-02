@@ -145,7 +145,7 @@ def main():
         its_board = ship_placement(its_board, manual=False)
 
         print("\n All ships are placed. Here is your and rival's boards:")
-        boards(your_board, board())  # Sadece oyuncunun tahtasını göster
+        boards(your_board, board())
         input("Please press 'ENTER' to start the game.")
 
         print("\n The game is starting... Your boards:")
